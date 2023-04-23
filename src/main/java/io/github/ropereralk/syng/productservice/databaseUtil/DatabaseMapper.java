@@ -36,7 +36,7 @@ public class DatabaseMapper {
     }
 
 
-    public List<JSONObject>findAll(String collection) throws DocumentNotFoundException {
+    public List<JSONObject> findAll(String collection) throws DocumentNotFoundException {
 
         Query query = new Query();
 
@@ -46,6 +46,26 @@ public class DatabaseMapper {
 
             if (documentList == null) {
                 throw new DocumentNotFoundException(HttpStatus.NOT_FOUND, "DB-FIND_All" + " : Document Not Found");
+            } else {
+                return documentList;
+            }
+        }catch (DocumentNotFoundException dne)   {
+            throw dne;
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public List<JSONObject> findAllByKey(String key, String value , String collection) throws Exception{
+
+        Query query = new Query();
+        query.addCriteria(Criteria.where(key).is(value));
+
+        try {
+            List<JSONObject> documentList= mongoConfiguration.mongoTemplate().find(query, JSONObject.class, collection);
+
+            if (documentList == null) {
+                throw new DocumentNotFoundException(HttpStatus.NOT_FOUND, "DB-FIND_ONE" + " : Document Not Found");
             } else {
                 return documentList;
             }
