@@ -2,6 +2,7 @@ package io.github.ropereralk.syng.productservice.controller;
 
 import io.github.ropereralk.syng.productservice.dto.ProductCategories;
 import io.github.ropereralk.syng.productservice.service.ProductService;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +25,10 @@ public class ProductController {
     }
 
     @GetMapping("/categories")
-    public List<ProductCategories> getProductCategories(){
+    List<JSONObject>  getProductCategories() throws Exception {
 
         LOGGER.info("ProductController.getProductCategories() Entering Get ProductList Controller");
-
-        return productService.getProducCategories();
+        return productService.getProductCategories();
 
 
 

@@ -2,16 +2,12 @@ package io.github.ropereralk.syng.productservice.service;
 
 import io.github.ropereralk.syng.productservice.repository.ProductCategoriesRepository;
 import org.json.simple.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class ProductServiceImpl implements  ProductService  {
-    @Autowired ProductCategoriesRepository productCategoriesRepository;
+public class ProductCategoriesService {
 
-    @Override
+    ProductCategoriesRepository productCategoriesRepository;
     public List<JSONObject> getProductCategories() throws Exception {
 
 
@@ -21,6 +17,4 @@ public class ProductServiceImpl implements  ProductService  {
         // Do Any Modifications
         return categoriesList;
     }
-
-
 }
