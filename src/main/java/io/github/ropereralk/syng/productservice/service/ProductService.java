@@ -6,7 +6,7 @@ import org.json.simple.JSONObject;
 import java.util.List;
 
 public interface ProductService {
-    List<JSONObject> getProductCategories() throws Exception;
+    List<JSONObject> getProductsByCategory(String productId) throws Exception;
 
 
 }

@@ -12,7 +12,7 @@ public class ProductServiceImpl implements  ProductService  {
     @Autowired ProductCategoriesRepository productCategoriesRepository;
 
     @Override
-    public List<JSONObject> getProductCategories() throws Exception {
+    public List<JSONObject> getProductsByCategory(String productId) throws Exception {
 
 
         //Get Data

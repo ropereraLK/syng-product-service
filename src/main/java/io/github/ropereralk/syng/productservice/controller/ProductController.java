@@ -1,17 +1,17 @@
 package io.github.ropereralk.syng.productservice.controller;
 
-import io.github.ropereralk.syng.productservice.dto.ProductCategories;
+import io.github.ropereralk.syng.productservice.exception.SanitizerException;
 import io.github.ropereralk.syng.productservice.service.ProductService;
-import org.json.simple.JSONObject;
+import io.github.ropereralk.syng.productservice.util.Sanitizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 
-@RestController("/product")
+@RestController
 public class ProductController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
@@ -19,18 +19,13 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping
-    public void getProductsByCategory(){
+    @GetMapping("category/{categoryId}/products")
+    public void getProductsByCategory(@PathVariable String categoryId ) throws Exception, SanitizerException {
 
-    }
-
-    @GetMapping("/categories")
-    List<JSONObject>  getProductCategories() throws Exception {
-
-        LOGGER.info("ProductController.getProductCategories() Entering Get ProductList Controller");
-        return productService.getProductCategories();
-
+        productService.getProductsByCategory(Sanitizer.sanitize(categoryId));
 
 
     }
+
+
 }
